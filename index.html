@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmed & Basant Wedding</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Montserrat',sans-serif;background:#f7eee8;color:#3f332d;overflow-x:hidden}
+
+    .hero{min-height:100vh;position:relative;overflow:hidden;background:#120d09}
+    .gate-cover{
+      position:absolute;inset:0;
+      background:url('gate.png') center/cover no-repeat;
+      z-index:10;cursor:pointer;
+      transition:1.4s ease;
+    }
+    .hero.opened .gate-cover{
+      opacity:0;transform:scale(1.08);filter:blur(8px);pointer-events:none;
+    }
+
+    .hero-content{
+      min-height:100vh;
+      display:flex;align-items:center;justify-content:center;text-align:center;
+      padding:40px 24px;
+      background:
+        linear-gradient(rgba(255,245,238,.78),rgba(240,213,205,.88)),
+        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=80') center/cover;
+    }
+
+    .intro{opacity:0;transform:translateY(35px);filter:blur(10px);transition:1.2s ease .4s}
+    .hero.opened .intro{opacity:1;transform:translateY(0);filter:blur(0)}
+
+    .small{letter-spacing:6px;text-transform:uppercase;color:#a77a3b;font-size:12px;font-weight:600}
+    .monogram{
+      font-family:'Great Vibes',cursive;
+      font-size:clamp(95px,25vw,190px);
+      color:#9b6a2f;
+      line-height:.8;
+      margin:25px 0;
+    }
+    .names{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(44px,9vw,90px);
+      color:#4d3a31;
+    }
+    .hero-text{margin-top:22px;font-size:20px;line-height:1.8;color:#5c4a42}
+    .arabic{font-family:'Noto Naskh Arabic',serif;direction:rtl;margin-top:14px;color:#7b5a33;font-size:22px}
+
+    section{
+      min-height:100vh;
+      display:flex;align-items:center;justify-content:center;
+      padding:95px 22px;
+      background:#f7eee8;
+      position:relative;
+    }
+
+    section:nth-child(even){
+      background:linear-gradient(135deg,#f4dfd7,#e8cfc6);
+    }
+
+    .card{
+      width:min(900px,100%);
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(180,130,70,.25);
+      border-radius:38px;
+      padding:55px 28px;
+      text-align:center;
+      box-shadow:0 30px 90px rgba(70,45,30,.16);
+      opacity:0;
+      transform:translateY(60px);
+      filter:blur(10px);
+      transition:1s ease;
+    }
+    .card.show{opacity:1;transform:translateY(0);filter:blur(0)}
+
+    h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(46px,8vw,86px);
+      color:#5a4032;
+      margin:18px 0 22px;
+    }
+
+    .text{font-size:21px;line-height:1.9;color:#4d4039;max-width:760px;margin:auto}
+
+    .countdown{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin-top:35px;
+    }
+    .box{
+      padding:25px 10px;
+      border-radius:24px;
+      background:#fff7f1;
+      border:1px solid rgba(170,120,60,.25);
+    }
+    .box strong{
+      display:block;
+      font-family:'Playfair Display',serif;
+      font-size:46px;
+      color:#9b6a2f;
+    }
+    .box span{
+      font-size:11px;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      color:#8c6a50;
+    }
+
+    .details{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-top:35px;
+    }
+    .detail{
+      background:#fff7f1;
+      padding:26px;
+      border-radius:26px;
+      border:1px solid rgba(170,120,60,.25);
+    }
+    .detail small{
+      display:block;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      color:#9b6a2f;
+      margin-bottom:10px;
+    }
+    .detail strong{
+      font-family:'Playfair Display',serif;
+      font-size:30px;
+      color:#4d3a31;
+    }
+
+    .btn{
+      display:inline-block;
+      margin-top:35px;
+      padding:15px 34px;
+      border-radius:50px;
+      background:linear-gradient(135deg,#b98b45,#7b5528);
+      color:white;
+      text-decoration:none;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    @media(max-width:700px){
+      .countdown{grid-template-columns:repeat(2,1fr)}
+      .details{grid-template-columns:1fr}
+      .card{padding:42px 22px}
+    }
+  </style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<header class="hero" id="hero">
+  <div class="gate-cover" onclick="openInvite()"></div>
+
+  <div class="hero-content">
+    <div class="intro">
+      <div class="small">The Wedding Of</div>
+      <div class="monogram">A & B</div>
+      <div class="names">Ahmed & Basant</div>
+      <p class="hero-text">A graceful celebration of love, joy, and a beautiful new beginning.</p>
+      <p class="arabic">يسعدنا أن تكونوا جزءًا من بداية حكايتنا</p>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="card">
+    <div class="small">Invitation</div>
+    <h2>You Are Invited</h2>
+    <p class="text">Together with our families, we warmly invite you to celebrate our wedding day and share this unforgettable evening with us.</p>
+    <p class="arabic">بقلوبٍ يغمرها السرور، يسعدنا حضوركم ومشاركتكم فرحتنا.</p>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <div class="small">Countdown</div>
+    <h2>Until We Say I Do</h2>
+    <div class="countdown">
+      <div class="box"><strong id="days">00</strong><span>Days</span></div>
+      <div class="box"><strong id="hours">00</strong><span>Hours</span></div>
+      <div class="box"><strong id="minutes">00</strong><span>Minutes</span></div>
+      <div class="box"><strong id="seconds">00</strong><span>Seconds</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <div class="small">Wedding Details</div>
+    <h2>28 July 2026</h2>
+
+    <div class="details">
+      <div class="detail">
+        <small>Time</small>
+        <strong>7:00 PM</strong>
+      </div>
+      <div class="detail">
+        <small>Event</small>
+        <strong>Wedding Night</strong>
+      </div>
+    </div>
+
+    <a class="btn" href="https://share.google/Vg7m8ODKtcburS1um" target="_blank">Open Location</a>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <div class="small">With Love</div>
+    <h2>Ahmed & Basant</h2>
+    <p class="text">We would love to celebrate this special beginning with you.</p>
+    <p class="arabic">وجودكم بيننا يزيد هذه الليلة جمالًا وبهجة.</p>
+  </div>
+</section>
+
+<script>
+  function openInvite(){
+    document.getElementById("hero").classList.add("opened");
+
+    const music = document.getElementById("music");
+    music.volume = 0;
+    music.play().catch(()=>{});
+
+    let fade = setInterval(() => {
+      if (music.volume < 0.08) {
+        music.volume = Math.min(music.volume + 0.01, 0.08);
+      } else {
+        clearInterval(fade);
+      }
+    }, 400);
+  }
+
+  const weddingDate = new Date("2026-07-28T19:00:00").getTime();
+
+  function updateCountdown(){
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+
+    if(distance <= 0) return;
+
+    document.getElementById("days").textContent =
+      Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    document.getElementById("hours").textContent =
+      String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2,"0");
+
+    document.getElementById("minutes").textContent =
+      String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2,"0");
+
+    document.getElementById("seconds").textContent =
+      String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2,"0");
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown,1000);
+
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting) entry.target.classList.add("show");
+    });
+  },{threshold:.22});
+
+  document.querySelectorAll(".card").forEach(card=>observer.observe(card));
+</script>
+
+</body>
+</html>
