@@ -3,163 +3,381 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ahmed & Basant Wedding</title>
+  <title>Mohammed & Laila Wedding</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    :root{
+      --rose:#cfa6a0;
+      --rose-deep:#9f6f6b;
+      --blue:#9fb6c9;
+      --blue-deep:#627f96;
+      --cream:#fff7ef;
+      --gold:#b89455;
+      --text:#3f3a36;
+    }
+
     *{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{font-family:'Montserrat',sans-serif;background:#f7eee8;color:#3f332d;overflow-x:hidden}
+    body{font-family:'Montserrat',sans-serif;background:#f4e9e5;color:var(--text);overflow-x:hidden}
 
     .hero{min-height:100vh;position:relative;overflow:hidden;background:#120d09}
+
     .gate-cover{
-      position:absolute;inset:0;
+      position:absolute;
+      inset:0;
       background:url('gate.png') center/cover no-repeat;
-      z-index:10;cursor:pointer;
-      transition:1.4s ease;
-    }
-    .hero.opened .gate-cover{
-      opacity:0;transform:scale(1.08);filter:blur(8px);pointer-events:none;
+      background-color:#120d09;
+      z-index:20;
+      cursor:pointer;
+      transition:opacity 1.25s ease,transform 1.6s ease,filter 1.25s ease;
     }
 
-    .hero-content{
+    .hero.opened .gate-cover{
+      opacity:0;
+      transform:scale(1.08);
+      filter:blur(8px);
+      pointer-events:none;
+    }
+
+    .hero-inner{
       min-height:100vh;
-      display:flex;align-items:center;justify-content:center;text-align:center;
-      padding:40px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:40px 22px;
+      position:relative;
       background:
-        linear-gradient(rgba(255,245,238,.78),rgba(240,213,205,.88)),
+        linear-gradient(135deg,rgba(207,166,160,.72),rgba(159,182,201,.62)),
         url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=80') center/cover;
     }
 
-    .intro{opacity:0;transform:translateY(35px);filter:blur(10px);transition:1.2s ease .4s}
-    .hero.opened .intro{opacity:1;transform:translateY(0);filter:blur(0)}
-
-    .small{letter-spacing:6px;text-transform:uppercase;color:#a77a3b;font-size:12px;font-weight:600}
-    .monogram{
-      font-family:'Great Vibes',cursive;
-      font-size:clamp(95px,25vw,190px);
-      color:#9b6a2f;
-      line-height:.8;
-      margin:25px 0;
+    .hero-inner::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 50% 34%,rgba(255,250,245,.72),transparent 32%),
+        radial-gradient(circle at 50% 82%,rgba(184,148,85,.18),transparent 45%);
     }
+
+    .intro{
+      position:relative;
+      z-index:2;
+      opacity:0;
+      transform:translateY(34px);
+      filter:blur(10px);
+      transition:1.25s ease .4s;
+      max-width:880px;
+    }
+
+    .hero.opened .intro{
+      opacity:1;
+      transform:translateY(0);
+      filter:blur(0);
+    }
+
+    .kicker,.label{
+      color:#a8793b;
+      font-size:12px;
+      letter-spacing:7px;
+      text-transform:uppercase;
+      margin-bottom:22px;
+      font-weight:700;
+    }
+
     .names{
       font-family:'Playfair Display',serif;
-      font-size:clamp(44px,9vw,90px);
-      color:#4d3a31;
+      font-size:clamp(62px,13vw,135px);
+      font-weight:700;
+      line-height:.9;
+      color:#8f6428;
+      letter-spacing:-2px;
+      text-shadow:
+        0 2px 4px rgba(255,255,255,.45),
+        0 10px 28px rgba(143,100,40,.28);
     }
-    .hero-text{margin-top:22px;font-size:20px;line-height:1.8;color:#5c4a42}
-    .arabic{font-family:'Noto Naskh Arabic',serif;direction:rtl;margin-top:14px;color:#7b5a33;font-size:22px}
 
-    section{
+    .names span{
+      display:block;
+      font-size:.78em;
+      color:#c79b63;
+      font-weight:700;
+      margin:8px 0;
+      text-shadow:
+        0 2px 4px rgba(255,255,255,.35),
+        0 8px 18px rgba(0,0,0,.12);
+    }
+
+    .hero-text{
+      max-width:650px;
+      margin:28px auto 0;
+      color:#4a3521;
+      font-size:clamp(17px,2.5vw,23px);
+      line-height:1.9;
+      font-weight:500;
+      text-shadow:0 2px 10px rgba(255,255,255,.45);
+    }
+
+    .arabic-line,.arabic{
+      font-family:'Noto Naskh Arabic',serif;
+      direction:rtl;
+    }
+
+    .arabic-line{
+      margin-top:16px;
+      color:#6a4a28;
+      font-size:clamp(18px,2.4vw,24px);
+      font-weight:600;
+      text-shadow:0 2px 10px rgba(255,255,255,.45);
+    }
+
+    .section{
       min-height:100vh;
-      display:flex;align-items:center;justify-content:center;
-      padding:95px 22px;
-      background:#f7eee8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:110px 22px;
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(135deg,rgba(207,166,160,.78),rgba(159,182,201,.72)),
+        url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1800&q=80') center/cover fixed;
+    }
+
+    .section.alt{
+      background:
+        linear-gradient(135deg,rgba(80,92,104,.76),rgba(159,120,116,.70)),
+        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1800&q=80') center/cover fixed;
+      color:#fffaf5;
+    }
+
+    .section::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 14% 20%,rgba(255,250,245,.38),transparent 26%),
+        radial-gradient(circle at 88% 76%,rgba(184,148,85,.18),transparent 30%);
+      pointer-events:none;
+    }
+
+    .section::after{
+      content:'';
+      position:absolute;
+      inset:28px;
+      border:1px solid rgba(255,250,245,.26);
+      border-radius:36px;
+      pointer-events:none;
+    }
+
+    .panel{
+      width:min(980px,100%);
+      position:relative;
+      z-index:2;
+      text-align:center;
+      padding:clamp(42px,6vw,78px);
+      border-radius:36px;
+      background:linear-gradient(145deg,rgba(255,250,245,.72),rgba(242,218,211,.48));
+      border:1px solid rgba(255,250,245,.42);
+      box-shadow:0 36px 100px rgba(63,58,54,.22);
+      backdrop-filter:blur(18px);
+      opacity:0;
+      transform:translateY(70px) scale(.97);
+      filter:blur(12px);
+      transition:1.15s ease;
+    }
+
+    .alt .panel{
+      background:linear-gradient(145deg,rgba(255,250,245,.16),rgba(255,250,245,.08));
+      border-color:rgba(255,250,245,.28);
+      box-shadow:0 40px 110px rgba(45,42,40,.30);
+    }
+
+    .panel.show{
+      opacity:1;
+      transform:translateY(0) scale(1);
+      filter:blur(0);
+    }
+
+    .ornament{
+      width:120px;
+      height:1px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      margin:0 auto 26px;
       position:relative;
     }
 
-    section:nth-child(even){
-      background:linear-gradient(135deg,#f4dfd7,#e8cfc6);
+    .ornament::after{
+      content:'✦';
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      color:var(--gold);
+      background:rgba(255,250,245,.78);
+      padding:0 10px;
     }
 
-    .card{
-      width:min(900px,100%);
-      background:rgba(255,255,255,.72);
-      border:1px solid rgba(180,130,70,.25);
-      border-radius:38px;
-      padding:55px 28px;
-      text-align:center;
-      box-shadow:0 30px 90px rgba(70,45,30,.16);
-      opacity:0;
-      transform:translateY(60px);
-      filter:blur(10px);
-      transition:1s ease;
+    .alt .ornament::after{
+      background:rgba(95,92,104,.55);
+      color:#f4d8c8;
     }
-    .card.show{opacity:1;transform:translateY(0);filter:blur(0)}
 
     h2{
       font-family:'Playfair Display',serif;
-      font-size:clamp(46px,8vw,86px);
-      color:#5a4032;
-      margin:18px 0 22px;
+      font-size:clamp(48px,8vw,92px);
+      line-height:1;
+      font-weight:600;
+      color:#6d5550;
+      margin-bottom:24px;
+      letter-spacing:-1px;
     }
 
-    .text{font-size:21px;line-height:1.9;color:#4d4039;max-width:760px;margin:auto}
+    .alt h2{color:#fffaf5}
+
+    .text{
+      font-size:clamp(18px,2.5vw,25px);
+      line-height:1.9;
+      font-weight:300;
+      color:#3f3a36;
+      max-width:780px;
+      margin:0 auto;
+    }
+
+    .alt .text{color:rgba(255,250,245,.88)}
+
+    .arabic{
+      color:#6d5550;
+      font-size:clamp(18px,2.3vw,24px);
+      line-height:2.05;
+      margin-top:24px;
+    }
+
+    .alt .arabic{color:#f6dfd6}
 
     .countdown{
       display:grid;
       grid-template-columns:repeat(4,1fr);
       gap:14px;
-      margin-top:35px;
-    }
-    .box{
-      padding:25px 10px;
-      border-radius:24px;
-      background:#fff7f1;
-      border:1px solid rgba(170,120,60,.25);
-    }
-    .box strong{
-      display:block;
-      font-family:'Playfair Display',serif;
-      font-size:46px;
-      color:#9b6a2f;
-    }
-    .box span{
-      font-size:11px;
-      letter-spacing:3px;
-      text-transform:uppercase;
-      color:#8c6a50;
+      margin:38px auto 0;
+      max-width:820px;
     }
 
-    .details{
+    .timebox{
+      padding:26px 12px;
+      border-radius:26px;
+      background:rgba(255,250,245,.58);
+      border:1px solid rgba(255,250,245,.36);
+      box-shadow:0 18px 45px rgba(63,58,54,.14);
+    }
+
+    .alt .timebox{
+      background:rgba(255,250,245,.13);
+      border-color:rgba(255,250,245,.22);
+    }
+
+    .timebox strong{
+      display:block;
+      font-family:'Playfair Display',serif;
+      font-size:clamp(34px,6vw,58px);
+      color:#6d5550;
+      line-height:1;
+    }
+
+    .alt .timebox strong{color:#fffaf5}
+
+    .timebox span{
+      text-transform:uppercase;
+      letter-spacing:4px;
+      color:var(--rose-deep);
+      font-size:11px;
+      margin-top:10px;
+      display:block;
+    }
+
+    .alt .timebox span{color:#f4d8c8}
+
+    .venue-card{
+      margin:34px auto 0;
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:16px;
-      margin-top:35px;
+      gap:18px;
+      max-width:820px;
+      text-align:left;
     }
+
     .detail{
-      background:#fff7f1;
-      padding:26px;
-      border-radius:26px;
-      border:1px solid rgba(170,120,60,.25);
+      padding:28px;
+      border-radius:28px;
+      background:rgba(255,250,245,.54);
+      border:1px solid rgba(255,250,245,.35);
+      box-shadow:0 18px 50px rgba(63,58,54,.13);
     }
+
     .detail small{
       display:block;
-      letter-spacing:3px;
+      color:var(--rose-deep);
+      letter-spacing:4px;
       text-transform:uppercase;
-      color:#9b6a2f;
+      font-size:11px;
       margin-bottom:10px;
     }
+
     .detail strong{
       font-family:'Playfair Display',serif;
-      font-size:30px;
-      color:#4d3a31;
+      font-size:34px;
+      color:#6d5550;
+      font-weight:600;
     }
+
+    .alt .detail{background:rgba(255,250,245,.12)}
+    .alt .detail strong{color:#fffaf5}
+    .alt .detail small{color:#f4d8c8}
 
     .btn{
       display:inline-block;
-      margin-top:35px;
+      margin-top:34px;
       padding:15px 34px;
-      border-radius:50px;
-      background:linear-gradient(135deg,#b98b45,#7b5528);
-      color:white;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--rose-deep),var(--blue-deep));
+      color:#fffaf5;
       text-decoration:none;
-      letter-spacing:3px;
       text-transform:uppercase;
+      letter-spacing:3px;
       font-size:12px;
+      box-shadow:0 18px 45px rgba(63,58,54,.22);
+      transition:.35s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-4px);
+      box-shadow:0 25px 55px rgba(63,58,54,.30);
+    }
+
+    .signature{
+      font-family:'Playfair Display',serif;
+      color:#fffaf5;
+      font-size:clamp(44px,9vw,92px);
+      margin-top:26px;
+      letter-spacing:-2px;
     }
 
     @media(max-width:700px){
+      .gate-cover{background-position:center;background-size:cover}
+      .section{background-attachment:scroll;padding:90px 18px}
+      .section::after{inset:14px;border-radius:24px}
       .countdown{grid-template-columns:repeat(2,1fr)}
-      .details{grid-template-columns:1fr}
-      .card{padding:42px 22px}
+      .venue-card{grid-template-columns:1fr;text-align:center}
+      .panel{border-radius:28px}
+      .kicker,.label{letter-spacing:5px}
     }
   </style>
 </head>
-
 <body>
 
 <audio id="music" loop>
@@ -169,116 +387,129 @@
 <header class="hero" id="hero">
   <div class="gate-cover" onclick="openInvite()"></div>
 
-  <div class="hero-content">
+  <div class="hero-inner">
     <div class="intro">
-      <div class="small">The Wedding Of</div>
-      <div class="monogram">A & B</div>
-      <div class="names">Ahmed & Basant</div>
-      <p class="hero-text">A graceful celebration of love, joy, and a beautiful new beginning.</p>
-      <p class="arabic">يسعدنا أن تكونوا جزءًا من بداية حكايتنا</p>
+      <div class="kicker">The Wedding Of</div>
+      <div class="names">Mohammed <span>&</span> Laila</div>
+      <p class="hero-text">A beautiful beginning, a warm celebration, and a night made brighter by the people we love.</p>
+      <p class="arabic-line">نُضيء بكم أولى صفحات حكايتنا</p>
     </div>
   </div>
 </header>
 
-<section>
-  <div class="card">
-    <div class="small">Invitation</div>
+<section class="section">
+  <div class="panel">
+    <div class="label">Invitation</div>
+    <div class="ornament"></div>
     <h2>You Are Invited</h2>
-    <p class="text">Together with our families, we warmly invite you to celebrate our wedding day and share this unforgettable evening with us.</p>
-    <p class="arabic">بقلوبٍ يغمرها السرور، يسعدنا حضوركم ومشاركتكم فرحتنا.</p>
+    <p class="text">Together with our families, we invite you to celebrate an evening of love, elegance, and unforgettable memories.</p>
+    <p class="arabic">بقلوبٍ يغمرها السرور، يسعدنا أن تكونوا جزءًا من بداية حكايتنا.</p>
   </div>
 </section>
 
-<section>
-  <div class="card">
-    <div class="small">Countdown</div>
+<section class="section alt">
+  <div class="panel">
+    <div class="label">Countdown</div>
+    <div class="ornament"></div>
     <h2>Until We Say I Do</h2>
+    <p class="text">Counting down to a night we will remember forever.</p>
+
     <div class="countdown">
-      <div class="box"><strong id="days">00</strong><span>Days</span></div>
-      <div class="box"><strong id="hours">00</strong><span>Hours</span></div>
-      <div class="box"><strong id="minutes">00</strong><span>Minutes</span></div>
-      <div class="box"><strong id="seconds">00</strong><span>Seconds</span></div>
+      <div class="timebox"><strong id="days">00</strong><span>Days</span></div>
+      <div class="timebox"><strong id="hours">00</strong><span>Hours</span></div>
+      <div class="timebox"><strong id="minutes">00</strong><span>Minutes</span></div>
+      <div class="timebox"><strong id="seconds">00</strong><span>Seconds</span></div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="card">
-    <div class="small">Wedding Details</div>
-    <h2>28 July 2026</h2>
+<section class="section">
+  <div class="panel">
+    <div class="label">Wedding Date</div>
+    <div class="ornament"></div>
+    <h2>12 August 2026</h2>
+    <p class="text">An elegant evening made brighter by your presence.</p>
+  </div>
+</section>
 
-    <div class="details">
+<section class="section alt">
+  <div class="panel">
+    <div class="label">Venue</div>
+    <div class="ornament"></div>
+    <h2>Nile Flori</h2>
+
+    <div class="venue-card">
       <div class="detail">
-        <small>Time</small>
-        <strong>7:00 PM</strong>
+        <small>Location</small>
+        <strong>Maadi, Cairo</strong>
       </div>
+
       <div class="detail">
-        <small>Event</small>
+        <small>Celebration</small>
         <strong>Wedding Night</strong>
       </div>
     </div>
 
-    <a class="btn" href="https://share.google/Vg7m8ODKtcburS1um" target="_blank">Open Location</a>
+    <p class="arabic">ننتظركم في ليلةٍ نرجو أن تبقى ذكراها جميلة في قلوبنا جميعًا.</p>
+    <a class="btn" href="https://share.google/Fk8NmMYGkiMhrX2z9" target="_blank">Open Location</a>
   </div>
 </section>
 
-<section>
-  <div class="card">
-    <div class="small">With Love</div>
-    <h2>Ahmed & Basant</h2>
-    <p class="text">We would love to celebrate this special beginning with you.</p>
-    <p class="arabic">وجودكم بيننا يزيد هذه الليلة جمالًا وبهجة.</p>
+<section class="section alt">
+  <div class="panel">
+    <div class="label">From Our Hearts</div>
+    <div class="ornament"></div>
+    <h2>Celebrate With Us</h2>
+    <p class="text">We would love to share this beautiful beginning with you.</p>
+    <div class="signature">M & L</div>
   </div>
 </section>
 
 <script>
   function openInvite(){
-    document.getElementById("hero").classList.add("opened");
+    document.getElementById('hero').classList.add('opened');
 
-    const music = document.getElementById("music");
-    music.volume = 0;
+    const music=document.getElementById('music');
+    music.volume=.18;
     music.play().catch(()=>{});
-
-    let fade = setInterval(() => {
-      if (music.volume < 0.08) {
-        music.volume = Math.min(music.volume + 0.01, 0.08);
-      } else {
-        clearInterval(fade);
-      }
-    }, 400);
   }
 
-  const weddingDate = new Date("2026-07-28T19:00:00").getTime();
+  const weddingDate = new Date('2026-08-12T20:00:00').getTime();
 
   function updateCountdown(){
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
-    if(distance <= 0) return;
+    if(distance <= 0){
+      ['days','hours','minutes','seconds'].forEach(id=>{
+        document.getElementById(id).textContent='00';
+      });
+      return;
+    }
 
-    document.getElementById("days").textContent =
-      Math.floor(distance / (1000 * 60 * 60 * 24));
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById("hours").textContent =
-      String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2,"0");
-
-    document.getElementById("minutes").textContent =
-      String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2,"0");
-
-    document.getElementById("seconds").textContent =
-      String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2,"0");
+    document.getElementById('days').textContent = String(days).padStart(2,'0');
+    document.getElementById('hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
   }
 
   updateCountdown();
-  setInterval(updateCountdown,1000);
+  setInterval(updateCountdown, 1000);
 
-  const observer = new IntersectionObserver(entries=>{
+  const observer=new IntersectionObserver(entries=>{
     entries.forEach(entry=>{
-      if(entry.isIntersecting) entry.target.classList.add("show");
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+      }
     });
   },{threshold:.22});
 
-  document.querySelectorAll(".card").forEach(card=>observer.observe(card));
+  document.querySelectorAll('.panel').forEach(el=>observer.observe(el));
 </script>
 
 </body>
